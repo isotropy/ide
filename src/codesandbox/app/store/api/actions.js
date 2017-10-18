@@ -4,7 +4,9 @@ import { values } from 'lodash';
 import sendError from 'codesandbox/app/utils/error';
 import notificationActions from '../notifications/actions';
 import apiRequest from '../services/api';
+import responses from '../services/apiMock';
 import type { BodyType } from '../services/api';
+
 import { jwtSelector } from '../user/selectors';
 
 type APIActions = {
@@ -57,7 +59,7 @@ const showError = error => dispatch => {
 export function doRequest(
   actions: APIActions,
   endpoint: string,
-  body?: BodyType
+  body?: BodyTypef
 ) {
   return async (dispatch: Function, getState: Function) => {
     const jwt = jwtSelector(getState());
@@ -70,7 +72,7 @@ export function doRequest(
     });
 
     try {
-      const data = await apiRequest(endpoint, jwt, body);
+      const data = process.env.NODE_ENV !== 'production' ? responses[actions.REQUEST] : await apiRequest(endpoint, jwt, body);
 
       dispatch({
         type: actions.SUCCESS,

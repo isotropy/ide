@@ -4,7 +4,6 @@ import axios from 'axios';
 
 import { optionsToParameterizedUrl } from '../../utils/url-generator';
 
-import responses from './apiMock';
 
 const API_ROOT = '/api/v1/';
 
@@ -52,11 +51,6 @@ export default (async function callApi(
       options.data = decamelizeKeys(body);
     }
   }
-  let result;
-  if (process.env.NODE_ENV !== 'production') {
-    result = {data: responses[options.url]};
-  } else {
-    result = await axios(options);
-  }
+  const result = await axios(options);
   return shouldCamelize ? camelizeKeys(result.data) : result.data;
 });
