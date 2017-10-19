@@ -18,7 +18,8 @@ import {
   secondaryPreStyle,
 } from '../styles';
 
-import generateAnsiHtml from 'react-dev-utils/ansiHTML';
+// TODO: Can't resolve 'react-dev-utils/ansiHTML'?
+// import generateAnsiHtml from 'react-dev-utils/ansiHTML';
 
 import codeFrame from 'babel-code-frame';
 
@@ -33,7 +34,7 @@ function createCode(
 ) {
   const sourceCode = [];
   let whiteSpace = Infinity;
-  sourceLines.forEach(function(e) {
+  sourceLines.forEach((e) => {
     const { content: text } = e;
     const m = text.match(/^\s*/);
     if (text === '') {
@@ -45,7 +46,7 @@ function createCode(
       whiteSpace = 0;
     }
   });
-  sourceLines.forEach(function(e) {
+  sourceLines.forEach((e) => {
     let { content: text } = e;
     const { lineNumber: line } = e;
 
@@ -64,7 +65,7 @@ function createCode(
       linesBelow: contextSize,
     }
   );
-  const htmlHighlight = generateAnsiHtml(ansiHighlight);
+  // const htmlHighlight = generateAnsiHtml(ansiHighlight);
   const code = document.createElement('code');
   code.innerHTML = htmlHighlight;
   applyStyles(code, codeStyle);
@@ -80,7 +81,7 @@ function createCode(
       if (text == null) {
         continue;
       }
-      if (text.indexOf(' ' + lineNum + ' |') === -1) {
+      if (text.indexOf(` ${  lineNum  } |`) === -1) {
         continue;
       }
       // $FlowFixMe
@@ -94,9 +95,9 @@ function createCode(
   pre.appendChild(code);
 
   if (typeof onSourceClick === 'function') {
-    let handler = onSourceClick;
+    const handler = onSourceClick;
     pre.style.cursor = 'pointer';
-    pre.addEventListener('click', function() {
+    pre.addEventListener('click', () => {
       handler();
     });
   }

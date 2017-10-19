@@ -37,7 +37,7 @@ function getServedPath(appPackageJson) {
 }
 
 const src = resolveApp('src');
-
+const sandboxSrc = path.join(src, 'codesandbox/sandbox');
 
 // config after eject: we're in ./config/
 module.exports = {
@@ -45,12 +45,15 @@ module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
+  sandboxHtml: path.join(sandboxSrc, 'index.html'),
   appIndexJs: resolveApp('src/index.js'),
   appPackageJson: resolveApp('package.json'),
   src,
+  sandboxSrc,
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  config: resolveApp('config'),
 };
