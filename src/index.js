@@ -1,59 +1,26 @@
-import React from 'react';
-import { AppContainer } from 'react-hot-loader';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
-import { ConnectedRouter } from 'react-router-redux';
-import registerServiceWorker from 'codesandbox/common/registerServiceWorker';
-import 'normalize.css';
-import notificationActions from 'codesandbox/app/store/notifications/actions';
+const express = require('express');
+const passport = require('passport');
+const Routes = require('./routes');
 
-import App from 'codesandbox/app/pages/index';
-import 'codesandbox/common/global.css';
-import 'codesandbox/app/split-pane.css';
-import createStore from 'codesandbox/app/store';
-import theme from 'codesandbox/common/theme';
-import logError from 'codesandbox/app/utils/error';
-import history from 'codesandbox/app/utils/history';
+const app = express();
 
-const rootEl = document.getElementById('root');
+const port = process.env.PORT || 8080;
 
-const store = createStore(history);
+app.use(passport.initialize());
+app.use(passport.session());
 
-const showNotification = (message, type) =>
-  store.dispatch(notificationActions.addNotification(message, type));
+app.use(Routes(app, express));
 
-registerServiceWorker('/service-worker.js', showNotification);
+app.use((err, req, res) => {
+  console.warn(`Internal server error: ${err}`);
+  res.status(err.status || 500).send('Internal Server Error');
+});
 
-const renderApp = RootComponent => {
-  try {
-    render(
-      <AppContainer>
-        <ThemeProvider theme={theme}>
-          <Provider store={store}>
-            <ConnectedRouter history={history}>
-              <RootComponent store={store} />
-            </ConnectedRouter>
-          </Provider>
-        </ThemeProvider>
-      </AppContainer>,
-      rootEl
-    );
-  } catch (e) {
-    logError(e);
-  }
-};
+process.on('uncaughtException', (err) => {
+  console.error(`Uncaught Exception Error: ${err}`);
+});
 
-renderApp(App);
-
-if (module.hot) {
-  module.hot.accept('codesandbox/app/pages/index', () => {
-    const NextApp = require('codesandbox/app/pages/index').default; // eslint-disable-line global-require
-    renderApp(NextApp);
-  });
-
-  module.hot.accept('codesandbox/common/theme', () => {
-    const NextApp = require('codesandbox/app/pages/index').default; // eslint-disable-line global-require
-    renderApp(NextApp);
-  });
-}
+app.listen(port, (err) => {
+  if (err) console.log(err);
+  else console.log(`Server listening on port: ${port}`);
+});

@@ -66,7 +66,7 @@ export const frameUrl = (shortid: string, append: string = '') => {
 export const forkSandboxUrl = (sandbox: Sandbox) =>
   `${sandboxUrl(sandbox)}/fork`;
 
-export const signInUrl = () => '/auth/github';
+export const signInUrl = () => 'http://localhost:8080/auth/github';
 export const signInZeitUrl = () => '/auth/zeit';
 
 export const profileUrl = (username: string) => `/u/${username}`;
