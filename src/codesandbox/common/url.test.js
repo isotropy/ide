@@ -6,36 +6,36 @@ function testSandboxOptions(url: string) {
 
 describe('url parameters', () => {
   it('keeps everything false on normal urls', () => {
-    testSandboxOptions('https://codesandbox.io/s/new');
+    testSandboxOptions('https://edit.looptype.com/s/new');
   });
 
   it('sets current module if there is one', () => {
-    testSandboxOptions('https://codesandbox.io/s/new?module=test');
+    testSandboxOptions('https://edit.looptype.com/s/new?module=test');
   });
 
   it('sets preview view', () => {
-    testSandboxOptions('https://codesandbox.io/s/new?view=preview');
+    testSandboxOptions('https://edit.looptype.com/s/new?view=preview');
   });
 
   it('sets editor view', () => {
-    testSandboxOptions('https://codesandbox.io/s/new?view=editor');
+    testSandboxOptions('https://edit.looptype.com/s/new?view=editor');
   });
 
   it("doesn't set unknown fields", () => {
-    testSandboxOptions('https://codesandbox.io/s/new?view=both');
+    testSandboxOptions('https://edit.looptype.com/s/new?view=both');
   });
 
   it('can hide navigation', () => {
-    testSandboxOptions('https://codesandbox.io/s/new?hidenavigation=1');
+    testSandboxOptions('https://edit.looptype.com/s/new?hidenavigation=1');
   });
 
   it('can autoresize', () => {
-    testSandboxOptions('https://codesandbox.io/s/new?autoresize=1');
+    testSandboxOptions('https://edit.looptype.com/s/new?autoresize=1');
   });
 
   it('can handle multiple options', () => {
     testSandboxOptions(
-      'https://codesandbox.io/s/new?autoresize=1&view=editor&module=test&hidenavigation=1'
+      'https://edit.looptype.com/s/new?autoresize=1&view=editor&module=test&hidenavigation=1'
     );
   });
 });

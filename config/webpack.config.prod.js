@@ -131,7 +131,7 @@ module.exports = merge(commonConfig, {
       },
       minify: true,
       // For unknown URLs, fallback to the index page
-      navigateFallback: 'https://new.codesandbox.io/frame.html',
+      navigateFallback: 'https://edit.looptype.com/frame.html',
       staticFileGlobs: ['www/frame.html'],
       stripPrefix: 'www/',
       // Ignores URLs starting from /__ (useful for Firebase):
@@ -154,7 +154,7 @@ module.exports = merge(commonConfig, {
         {
           // These should be dynamic, since it's not loaded from this domain
           // But from the root domain
-          urlPattern: /codesandbox\.io\/static\/js\/(vendor|common|sandbox)/,
+          urlPattern: /edit\.looptype\.com\/static\/js\/(vendor|common|sandbox)/,
           handler: 'networkFirst',
           options: {
             cache: {

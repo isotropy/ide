@@ -58,7 +58,7 @@ function registerValidSW(swUrl, sendNotification) {
 
               if (sendNotification) {
                 sendNotification(
-                  'CodeSandbox received an update, refresh to see it!',
+                  'LoopType received an update, refresh to see it!',
                   'notice'
                 );
               } else {
@@ -72,7 +72,7 @@ function registerValidSW(swUrl, sendNotification) {
 
               if (sendNotification) {
                 sendNotification(
-                  'CodeSandbox has been cached, it now works offline.',
+                  'LoopType has been cached, it now works offline.',
                   'success'
                 );
               }

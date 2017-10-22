@@ -12,7 +12,7 @@ const getHost = () => {
 
   return process.env.NODE_ENV === 'development'
     ? '*'
-    : 'https://codesandbox.io';
+    : 'http://edit.looptype.com';
 };
 
 module.exports = Object.keys(process.env)

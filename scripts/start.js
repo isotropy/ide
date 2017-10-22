@@ -159,10 +159,10 @@ function addMiddleware(devServer, index) {
       rewrites: [{ from: /\/embed/, to: '/embed.html' }],
     })
   );
-  if (process.env.LOCAL_SERVER) {
+  if (process.env.LOCAL_SERVER) { // TODO: To change when API ready
     devServer.use(
       '/api',
-      proxy({ target: 'https://codesandbox.io', changeOrigin: true })
+      proxy({ target: 'http://edit.looptype.com', changeOrigin: true })
     );
   }
   // Finally, by now we have certainly resolved the URL.
@@ -192,7 +192,7 @@ function runDevServer(port, protocol, index) {
     // Enable HTTPS if the HTTPS environment variable is set to 'true'
     https: protocol === 'https',
     // contentBase: paths.staticPath,
-    host: process.env.LOCAL_SERVER ? 'localhost' : 'codesandbox.dev',
+    host: process.env.LOCAL_SERVER ? 'localhost' : 'edit.looptype.com',
     disableHostCheck: !process.env.LOCAL_SERVER,
     contentBase: false,
     clientLogLevel: 'warning',
