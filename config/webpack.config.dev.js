@@ -26,6 +26,9 @@ module.exports = merge(
   commonConfig,
   {
     devtool: 'eval',
+    output: {
+      filename: 'static/js/[name].js',
+    },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin(),

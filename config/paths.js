@@ -46,7 +46,7 @@ module.exports = {
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   sandboxHtml: path.join(sandboxSrc, 'index.html'),
-  appIndexJs: resolveApp('src/index.js'),
+  appIndexJs: resolveApp('src/App.js'),
   appPackageJson: resolveApp('package.json'),
   src,
   sandboxSrc,

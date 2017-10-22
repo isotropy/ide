@@ -1,21 +1,59 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { AppContainer } from 'react-hot-loader';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
+import { ConnectedRouter } from 'react-router-redux';
+import registerServiceWorker from 'codesandbox/common/registerServiceWorker';
+import 'normalize.css';
+import notificationActions from 'codesandbox/app/store/notifications/actions';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+import App from 'codesandbox/app/pages/index';
+import 'codesandbox/common/global.css';
+import 'codesandbox/app/split-pane.css';
+import createStore from 'codesandbox/app/store';
+import theme from 'codesandbox/common/theme';
+import logError from 'codesandbox/app/utils/error';
+import history from 'codesandbox/app/utils/history';
+
+const rootEl = document.getElementById('root');
+
+const store = createStore(history);
+
+const showNotification = (message, type) =>
+  store.dispatch(notificationActions.addNotification(message, type));
+
+registerServiceWorker('/service-worker.js', showNotification);
+
+const renderApp = RootComponent => {
+  try {
+    render(
+      <AppContainer>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <ConnectedRouter history={history}>
+              <RootComponent store={store} />
+            </ConnectedRouter>
+          </Provider>
+        </ThemeProvider>
+      </AppContainer>,
+      rootEl
     );
+  } catch (e) {
+    logError(e);
   }
-}
+};
 
-export default App;
+renderApp(App);
+
+if (module.hot) {
+  module.hot.accept('codesandbox/app/pages/index', () => {
+    const NextApp = require('codesandbox/app/pages/index').default; // eslint-disable-line global-require
+    renderApp(NextApp);
+  });
+
+  module.hot.accept('codesandbox/common/theme', () => {
+    const NextApp = require('codesandbox/app/pages/index').default; // eslint-disable-line global-require
+    renderApp(NextApp);
+  });
+}

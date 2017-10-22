@@ -14,7 +14,7 @@ const __PROD__ = NODE_ENV === 'production'; // eslint-disable-line no-underscore
 
 module.exports = {
   entry: {
-    app: [require.resolve('./polyfills'), path.join(paths.src, 'index.js')],
+    app: [require.resolve('./polyfills'), path.join(paths.src, 'App.js')],
     sandbox: [
       require.resolve('./polyfills'),
       path.join(paths.sandboxSrc, 'index.js'),
@@ -26,6 +26,7 @@ module.exports = {
     fs: 'empty',
     module: 'empty',
     child_process: 'empty',
+    net: 'empty',
   },
   output: {
     path: paths.appBuild,

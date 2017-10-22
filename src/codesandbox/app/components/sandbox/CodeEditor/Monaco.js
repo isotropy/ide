@@ -16,7 +16,7 @@ import getTemplate from 'codesandbox/common/templates';
 
 /* eslint-disable import/no-webpack-loader-syntax */
 import SyntaxHighlightWorker from 'worker-loader!./monaco/workers/syntax-highlighter';
-import LinterWorker from 'worker-loader!./monaco/workers/linter';
+// import LinterWorker from 'worker-loader!./monaco/workers/linter';
 import TypingsFetcherWorker from 'worker-loader!./monaco/workers/fetch-dependency-typings';
 /* eslint-enable import/no-webpack-loader-syntax */
 
@@ -278,7 +278,7 @@ export default class CodeEditor extends React.Component<Props, State> {
     this.setupSyntaxWorker();
 
     if (this.props.preferences.lintEnabled) {
-      this.setupLintWorker();
+      // this.setupLintWorker();
     }
 
     if (this.props.preferences.autoDownloadTypes) {
@@ -495,7 +495,7 @@ export default class CodeEditor extends React.Component<Props, State> {
         return 'html';
       } else if (kind[1] === 'vue') {
         if (!this.monaco.languages.getLanguages().find(l => l.id === 'vue')) {
-          await requireAMDModule(['vs/language/vue/monaco.contribution']);
+          await requireAMDModule(['/public/vs/language/vue/monaco.contribution']);
         }
         return 'vue';
       } else if (kind[1] === 'less') {

@@ -57,7 +57,7 @@ export const frameUrl = (shortid: string, append: string = '') => {
   const path = append.indexOf('/') === 0 ? append.substr(1) : append;
 
   // if (process.env.LOCAL_SERVER) {
-    return `http://localhost:3001/${path}test.js`;  // TODO: To prevent recursive error for now
+    return `http://localhost:3001/${path}`;
   // }
 
   // return `${location.protocol}//${shortid}.${host()}/${path}`;
@@ -66,7 +66,7 @@ export const frameUrl = (shortid: string, append: string = '') => {
 export const forkSandboxUrl = (sandbox: Sandbox) =>
   `${sandboxUrl(sandbox)}/fork`;
 
-export const signInUrl = () => '/auth/github';
+export const signInUrl = () => 'http://localhost:8080/auth/github';
 export const signInZeitUrl = () => '/auth/zeit';
 
 export const profileUrl = (username: string) => `/u/${username}`;

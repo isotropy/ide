@@ -31,6 +31,7 @@ import HeaderSearchBar from 'codesandbox/app/components/HeaderSearchBar';
 import UserMenu from 'codesandbox/app/containers/UserMenu';
 import Preferences from 'codesandbox/app/containers/Preferences';
 import NewSandbox from 'codesandbox/app/containers/modals/NewSandbox';
+import SignIn from 'codesandbox/app/components/SignIn';
 
 import Deployment from 'codesandbox/app/containers/Deployment';
 
@@ -161,6 +162,13 @@ export default class Header extends React.PureComponent<Props> {
     this.props.modalActions.openModal({
       width: 900,
       Body: <Preferences />,
+    });
+  };
+
+  openSignIn = () => {
+    this.props.modalActions.openModal({
+      width: 900,
+      Body: <SignIn signInAction={this.props.userActions.signIn} />,
     });
   };
 
@@ -296,8 +304,8 @@ export default class Header extends React.PureComponent<Props> {
               </div>
             ) : (
               <Action
-                onClick={userActions.signIn}
-                title="Sign in with Github"
+                onClick={this.openSignIn}
+                title="Sign in"
                 Icon={GithubIcon}
                 highlight
                 unresponsive
