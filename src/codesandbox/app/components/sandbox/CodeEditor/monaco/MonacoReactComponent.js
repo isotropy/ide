@@ -41,7 +41,7 @@ class MonacoEditor extends React.Component {
     });
 
     // Load monaco
-    context.require(['/public/vs/editor/editor.main'], () => {
+    context.require(['vs/editor/editor.main'], () => {
       this.initMonaco();
     });
   }
