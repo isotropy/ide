@@ -1,12 +1,19 @@
 const passport = require('passport');
+const GitLabStrategy = require('passport-gitlab2').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
-// import { Strategy as FacebookStrategy } from 'passport-facebook';
-// import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+const FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const credentials = require("./credentials");
 
 const AuthRouter = (app, express) => {
 
   const router = express.Router();
+  
+  passport.use(new GitLabStrategy({
+    clientID: credentials.gitlab.clientID,
+    clientSecret: credentials.gitlab.clientSecret,
+    callbackURL: credentials.gitlab.callbackURL
+  }, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
 
   passport.use(new GitHubStrategy({
     clientID: credentials.github.clientID,
@@ -14,18 +21,17 @@ const AuthRouter = (app, express) => {
     callbackURL: credentials.github.callbackURL
   }, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
   
-  // passport.use(new FacebookStrategy({
-  //   clientID: CONFIG.facebook.appID,
-  //   clientSecret: CONFIG.facebook.appSecret,
-  //   callbackURL: CONFIG.facebook.callbackURL,
-  //   profileFields: CONFIG.facebook.permissions
-  // }, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
+  passport.use(new FacebookStrategy({
+    clientID: credentials.facebook.clientID,
+    clientSecret: credentials.facebook.clientSecret,
+    callbackURL: credentials.facebook.callbackURL
+  }, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
 
-  // passport.use(new GoogleStrategy({
-  //   clientID: CONFIG.google.appID,
-  //   clientSecret: CONFIG.google.appSecret,
-  //   callbackURL: CONFIG.google.callbackURL,
-  // }, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
+  passport.use(new GoogleStrategy({
+    clientID: credentials.google.clientID,
+    clientSecret: credentials.google.clientSecret,
+    callbackURL: credentials.google.callbackURL,
+  }, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
 
   passport.serializeUser((user, cb) => cb(null, user));
 
@@ -33,6 +39,9 @@ const AuthRouter = (app, express) => {
 
   router.get('/github',
     passport.authenticate('github', { display: 'popup' }));
+    
+  router.get('/facebook',
+    passport.authenticate('facebook', { display: 'popup' }));
 
   router.get('/google',
     passport.authenticate('google', { scope: ['profile'] }));
@@ -50,7 +59,6 @@ const AuthRouter = (app, express) => {
 
   return router;
 };
-
 
 const Routes = (app, express) => {
 

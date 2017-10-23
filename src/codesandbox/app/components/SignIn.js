@@ -30,8 +30,8 @@ button {
 
 export default class SignIn extends React.PureComponent {
   props: Props;
-  handleClick = () => {
-    this.props.signInAction();    
+  handleClick = host => {
+    this.props.signInAction(host);    
   };
 
   render() {
@@ -39,9 +39,9 @@ export default class SignIn extends React.PureComponent {
         <Container>
           Sign in using
           <Buttons>
-            <Button block onClick={this.handleClick}>Github</Button>
-            <Button block onClick={this.handleClick}>Google</Button>
-            <Button block onClick={this.handleClick}>Facebook</Button>
+            <Button block onClick={() => this.handleClick('github')}>Github</Button>
+            <Button block onClick={() => this.handleClick('google')}>Google</Button>
+            <Button block onClick={() => this.handleClick('facebook')}>Facebook</Button>
           </Buttons>
         </Container>
       );

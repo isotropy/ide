@@ -48,6 +48,33 @@ const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 
 let handleCompile;
+// Some custom utilities to prettify Webpack output.
+// This is a little hacky.
+// It would be easier if webpack provided a rich error object.
+const friendlySyntaxErrorLabel = 'Syntax error:';
+function isLikelyASyntaxError(message) {
+  return message.indexOf(friendlySyntaxErrorLabel) !== -1;
+}
+function formatMessage(message) {
+  return (
+    message
+      // Make some common errors shorter:
+      .replace(
+        // Babel syntax error
+        'Module build failed: SyntaxError:',
+        friendlySyntaxErrorLabel
+      )
+      .replace(
+        // Webpack file not found error
+        /Module not found: Error: Cannot resolve 'file' or 'directory'/,
+        'Module not found:'
+      )
+      // Internal stacks are generally useless so we strip them
+      .replace(/^\s*at\s.*:\d+:\d+[\s\)]*\n/gm, '') // at ... ...:x:y
+      // Webpack loader names obscure CSS filenames
+      .replace('./~/css-loader!./~/postcss-loader!', '')
+  );
+}
 
 function setupCompiler(port, protocol) {
   // "Compiler" is a low-level interface to Webpack.
@@ -91,10 +118,10 @@ function setupCompiler(port, protocol) {
     // https://github.com/facebookincubator/create-react-app/issues/401#issuecomment-238291901
     const json = stats.toJson({}, true);
     let formattedErrors = json.errors.map(
-      message => `Error in ${  formatMessage(message)}`
+      message => `Error in ${formatMessage(message)}`
     );
     const formattedWarnings = json.warnings.map(
-      message => `Warning in ${  formatMessage(message)}`
+      message => `Warning in ${formatMessage(message)}`
     );
     if (hasErrors) {
       console.log(chalk.red('Failed to compile.'));

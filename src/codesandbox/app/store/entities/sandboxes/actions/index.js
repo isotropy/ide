@@ -415,6 +415,10 @@ export default {
       })
     );
   },
+  
+  uploadToGitlab: (id: string) => async (dispatch: Function) => {
+    // TODO
+  },
 
   setSandboxPrivacy: (id: string, privacy: number) => async (
     dispatch: Function,

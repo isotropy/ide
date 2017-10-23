@@ -108,6 +108,11 @@ export default class Header extends React.PureComponent<Props> {
     sandboxActions.massUpdateModules(sandbox.id);
   };
 
+  uploadToGitlab = () => {
+    const { sandbox, sandboxActions } = this.props;
+    sandboxActions.uploadToGitlab(sandbox.id);
+  }
+
   deploySandbox = () => {
     const { sandbox } = this.props;
 
@@ -232,6 +237,11 @@ export default class Header extends React.PureComponent<Props> {
             onClick={canSave ? this.massUpdateModules : null}
             placeholder={canSave ? false : 'All modules are saved'}
             title="Save"
+            Icon={Save}
+          />
+          <Action
+            onClick={this.uploadToGitlab}
+            title="Upload to GitLab"
             Icon={Save}
           />
           <Action title="Download" Icon={Download} onClick={this.zipSandbox} />

@@ -100,12 +100,12 @@ const getCurrentUser = () => async (dispatch: Function, getState: Function) => {
   }
 };
 
-const signIn = () => (dispatch: Function) =>
+const signIn = host => (dispatch: Function) =>
   new Promise((resolve, reject) => {
     dispatch({
       type: SIGN_IN,
     });
-    const popup = openPopup(signInUrl(), 'sign in');
+    const popup = openPopup(signInUrl(host), 'sign in');
 
     window.addEventListener('message', function onMessage(e) {
       if (e.data.type === 'signin') {

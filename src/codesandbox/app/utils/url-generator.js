@@ -66,7 +66,19 @@ export const frameUrl = (shortid: string, append: string = '') => {
 export const forkSandboxUrl = (sandbox: Sandbox) =>
   `${sandboxUrl(sandbox)}/fork`;
 
-export const signInUrl = () => 'http://localhost:8080/auth/github';
+export const signInUrl = hostName => {
+  switch(hostName) {
+    case 'github':
+      return 'http://localhost:8080/auth/github';
+    case 'google':
+      return 'http://localhost:8080/auth/google';
+    case 'facebook':
+      return 'http://localhost:8080/auth/facebook';
+    default:
+      return '';
+  }
+};
+
 export const signInZeitUrl = () => '/auth/zeit';
 
 export const profileUrl = (username: string) => `/u/${username}`;
