@@ -67,21 +67,9 @@ export default class Logo extends React.PureComponent<{}> {
     return (
       <Relative>
         <Container id="release" ref={this.setupHeadway} href="/">
-          <div style={{ position: 'relative', display: 'flex' }}>
-            <LogoIcon width={30} height={30} />
-          </div>
-          <Title>CodeSandbox</Title>
+          <div style={{ position: 'relative', display: 'flex' }} />
+          <Title>LoopType</Title>
         </Container>
-
-        <GithubContainer
-          href="https://github.com/CompuIves/codesandbox-client"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <Tooltip title="View source">
-            <GithubIcon />
-          </Tooltip>
-        </GithubContainer>
       </Relative>
     );
   }

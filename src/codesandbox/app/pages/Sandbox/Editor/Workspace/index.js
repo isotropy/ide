@@ -154,11 +154,6 @@ const Workspace = ({
 
       <div>
         <ConnectionNotice />
-        <TermsContainer>
-          By using CodeSandbox you agree to our{' '}
-          <Link to={tosUrl()}>Terms and Conditions</Link> and{' '}
-          <Link to={privacyUrl()}>Privacy Policy</Link>.
-        </TermsContainer>
       </div>
     </Container>
   </ThemeProvider>

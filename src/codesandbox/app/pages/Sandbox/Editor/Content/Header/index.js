@@ -13,7 +13,6 @@ import NowIcon from 'codesandbox/app/components/NowLogo';
 import HeartIcon from 'react-icons/lib/fa/heart-o';
 import FullHeartIcon from 'react-icons/lib/fa/heart';
 import TwitterIcon from 'react-icons/lib/fa/twitter';
-import SearchIcon from 'react-icons/lib/go/search';
 import SettingsIcon from 'react-icons/lib/md/settings';
 import { Tooltip } from 'react-tippy';
 
@@ -21,13 +20,11 @@ import type { Sandbox, CurrentUser } from 'codesandbox/common/types';
 import sandboxActionCreators from 'codesandbox/app/store/entities/sandboxes/actions';
 import userActionCreators from 'codesandbox/app/store/user/actions';
 import modalActionCreators from 'codesandbox/app/store/modal/actions';
-import { searchUrl, patronUrl } from 'codesandbox/app/utils/url-generator';
 import ModeIcons from 'codesandbox/app/components/sandbox/ModeIcons';
 
 // $FlowIssue
 import PatronBadge from '-!svg-react-loader!codesandbox/app/utils/badges/svg/patron-4.svg'; // eslint-disable-line import/no-webpack-loader-syntax
 import Margin from 'codesandbox/app/components/spacing/Margin';
-import HeaderSearchBar from 'codesandbox/app/components/HeaderSearchBar';
 import UserMenu from 'codesandbox/app/containers/UserMenu';
 import Preferences from 'codesandbox/app/containers/Preferences';
 import NewSandbox from 'codesandbox/app/containers/modals/NewSandbox';
@@ -37,7 +34,6 @@ import Deployment from 'codesandbox/app/containers/Deployment';
 
 import Action from './Action';
 import FeedbackView from './FeedbackView';
-import ShareView from './ShareView';
 
 const Container = styled.div`
   display: flex;
@@ -239,11 +235,6 @@ export default class Header extends React.PureComponent<Props> {
             title="Save"
             Icon={Save}
           />
-          <Action
-            onClick={this.uploadToGitlab}
-            title="Upload to GitLab"
-            Icon={Save}
-          />
           <Action title="Download" Icon={Download} onClick={this.zipSandbox} />
           {user.jwt &&
             sandbox.owned && (
@@ -253,44 +244,9 @@ export default class Header extends React.PureComponent<Props> {
                 onClick={this.deploySandbox}
               />
             )}
-          <ShareView sandbox={sandbox} />
         </Left>
 
         <Right>
-          <Media query="(max-width: 1560px)">
-            {matches =>
-              matches ? (
-                <Action href={searchUrl()} Icon={SearchIcon} tooltip="Search" />
-              ) : (
-                <div style={{ marginRight: '0.5rem', fontSize: '.875rem' }}>
-                  <HeaderSearchBar />
-                </div>
-              )}
-          </Media>
-
-          {!user ||
-            (!user.subscription && (
-              <Action
-                href={patronUrl()}
-                tooltip="Support CodeSandbox"
-                Icon={PatronBadge}
-                iconProps={{
-                  width: 16,
-                  height: 32,
-                  transform: 'scale(1.5, 1.5)',
-                }}
-              />
-            ))}
-          <Action
-            href="https://twitter.com/CompuIves"
-            a
-            tooltip="Contact"
-            Icon={TwitterIcon}
-          />
-          <FeedbackView
-            email={user.email}
-            sendMessage={userActions.sendFeedback}
-          />
           <Action
             onClick={this.openNewSandbox}
             tooltip="New Sandbox"
