@@ -9,11 +9,11 @@ const AuthRouter = (app, express) => {
 
   const router = express.Router();
   
-  passport.use(new GitLabStrategy({
-    clientID: credentials.gitlab.clientID,
-    clientSecret: credentials.gitlab.clientSecret,
-    callbackURL: credentials.gitlab.callbackURL
-  }, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
+  // passport.use(new GitLabStrategy({
+  //   clientID: credentials.gitlab.clientID,
+  //   clientSecret: credentials.gitlab.clientSecret,
+  //   callbackURL: credentials.gitlab.callbackURL
+  // }, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
 
   passport.use(new GitHubStrategy({
     clientID: credentials.github.clientID,

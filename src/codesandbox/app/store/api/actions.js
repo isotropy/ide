@@ -72,8 +72,9 @@ export function doRequest(
     });
 
     try {
-      const data = process.env.NODE_ENV !== 'production' ? responses[actions.REQUEST] : await apiRequest(endpoint, jwt, body);
-
+      // TODO: Uncomment when API ready
+      // const data = process.env.NODE_ENV !== 'production' ? responses[actions.REQUEST] : await apiRequest(endpoint, jwt, body);
+      const data = responses[actions.REQUEST];
       dispatch({
         type: actions.SUCCESS,
         data,

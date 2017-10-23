@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const Routes = require('./routes');
+const path = require('path');
 
 const app = express();
 
@@ -11,9 +12,10 @@ app.use(passport.session());
 
 app.use(Routes(app, express));
 
-app.use((err, req, res) => {
-  console.warn(`Internal server error: ${err}`);
-  res.status(err.status || 500).send('Internal Server Error');
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'app.html'));
 });
 
 process.on('uncaughtException', (err) => {

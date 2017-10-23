@@ -9,12 +9,12 @@ const buildEncodedUri = (strings: Array<string>, ...values: Array<string>) =>
 
 export const host = () => {
   if (process.env.NODE_ENV === 'production') {
-    return 'codesandbox.io';
+    return 'looptype.com';
   }
   if (process.env.LOCAL_SERVER) {
     return 'localhost:3000';
   }
-  return 'codesandbox.dev';
+  return 'looptype.com';
 };
 
 export const protocolAndHost = () => `${location.protocol}//${host()}`;
@@ -56,11 +56,11 @@ export const embedUrl = (sandbox: Sandbox) => {
 export const frameUrl = (shortid: string, append: string = '') => {
   const path = append.indexOf('/') === 0 ? append.substr(1) : append;
 
-  // if (process.env.LOCAL_SERVER) {
+  if (process.env.LOCAL_SERVER) {
     return `http://localhost:3001/${path}`;
-  // }
+  }
 
-  // return `${location.protocol}//${shortid}.${host()}/${path}`;
+  return `${location.protocol}//${shortid}.${host()}/${path}`;
 };
 
 export const forkSandboxUrl = (sandbox: Sandbox) =>
