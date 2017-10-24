@@ -6,6 +6,7 @@ import Media from 'react-media';
 import Save from 'react-icons/lib/md/save';
 import Fork from 'react-icons/lib/go/repo-forked';
 import Download from 'react-icons/lib/go/cloud-download';
+import Deploy from 'react-icons/lib/go/rocket';
 import PlusIcon from 'react-icons/lib/go/plus';
 import GithubIcon from 'react-icons/lib/go/mark-github';
 import ChevronLeft from 'react-icons/lib/md/chevron-left';
@@ -236,6 +237,15 @@ export default class Header extends React.PureComponent<Props> {
             Icon={Save}
           />
           <Action title="Download" Icon={Download} onClick={this.zipSandbox} />
+          {user.jwt &&
+            sandbox.owned && (
+              <Action
+                title="Deploy"
+                Icon={NowIcon}
+                onClick={this.deploySandbox}
+              />
+            )}
+          <Action title="Deploy" Icon={Deploy} onClick={this.deploySandbox} />
           {user.jwt &&
             sandbox.owned && (
               <Action

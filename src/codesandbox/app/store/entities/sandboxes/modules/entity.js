@@ -28,8 +28,8 @@ export default new schema.Entity(
   {
     processStrategy: module => {
       const defaultCode = getDefaultCode(module);
-      const shouldUpdate = module.code == null;
-      const code = shouldUpdate ? defaultCode : module.code;
+      const shouldUpdate = module.contents == null;
+      const code = shouldUpdate ? defaultCode : module.contents;
 
       const isNotSynced = shouldUpdate && defaultCode !== module.code;
       return {
