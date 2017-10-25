@@ -58,16 +58,21 @@ module.exports = {
         loader: require.resolve('babel-loader'),
         query: {
           babelrc: false,
-          presets: [['es2015', { modules: false }], 'react', 'flow'],
+          presets: ['env', 'react'],
           plugins: [
-            "babel-plugin-transform-async-to-generator",
-            "babel-plugin-transform-object-rest-spread",
-            "babel-plugin-transform-class-properties",
-            "babel-plugin-transform-runtime",
-            "babel-plugin-syntax-dynamic-import",
-            "babel-plugin-lodash",
-            "babel-plugin-lodash",
-            "babel-plugin-system-import-transformer"
+            'babel-plugin-transform-async-to-generator',
+            'babel-plugin-transform-object-rest-spread',
+            'babel-plugin-transform-class-properties',
+            'babel-plugin-transform-runtime',
+            'babel-plugin-syntax-dynamic-import',
+            'babel-plugin-lodash',
+            [
+              'react-loadable/babel',
+              {
+                'server': true,
+                'webpack': true
+              }
+            ]
           ]
         }
       },      

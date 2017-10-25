@@ -5,7 +5,7 @@ function getHost() {
 
   return process.env.NODE_ENV === 'development'
     ? '*'
-    : 'https://codesandbox.io';
+    : 'http://edit.looptype.com';
 }
 
 export default getHost();
