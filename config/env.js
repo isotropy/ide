@@ -12,7 +12,7 @@ const getHost = () => {
 
   return process.env.NODE_ENV === 'development'
     ? '*'
-    : 'http://edit.looptype.com';
+    : 'http://looptype.com:8080';
 };
 
 module.exports = Object.keys(process.env)
