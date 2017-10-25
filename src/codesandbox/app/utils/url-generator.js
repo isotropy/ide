@@ -67,13 +67,14 @@ export const forkSandboxUrl = (sandbox: Sandbox) =>
   `${sandboxUrl(sandbox)}/fork`;
 
 export const signInUrl = hostName => {
+  const root = process.env.LOCAL_SERVER ? 'http://localhost:8080' : window.location.hostname;
   switch(hostName) {
     case 'github':
-      return 'http://localhost:8080/auth/github';
+      return `${root}/auth/github`;
     case 'google':
-      return 'http://localhost:8080/auth/google';
+      return `${root}/auth/google`;
     case 'facebook':
-      return 'http://localhost:8080/auth/facebook';
+      return `${root}/auth/facebook`;
     default:
       return '';
   }
