@@ -5,7 +5,7 @@ function getHost() {
 
   return process.env.NODE_ENV === 'development'
     ? '*'
-    : 'http://edit.looptype.com:8080';
+    : 'looptype.com:8080';
 }
 
 export default getHost();
