@@ -60,7 +60,7 @@ export const frameUrl = (shortid: string, append: string = '') => {
     return `http://localhost:3001/${path}`;
   }
 
-  return `${location.protocol}//${shortid}.${host()}/${path}frame.html`;
+  return `${location.protocol}//${shortid}.${host()}/${path}`;
 };
 
 export const forkSandboxUrl = (sandbox: Sandbox) =>

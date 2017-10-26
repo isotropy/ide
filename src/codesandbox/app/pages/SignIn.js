@@ -23,17 +23,20 @@ export default class SignIn extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    if (props.match.params.jwt) {
+    const query = props.location.search.split('?code=');    
+
+    if (query) {
+      const jwt = query[1];
       if (window.opener) {
         this.state = {
-          jwt: props.match.params.jwt,
+          jwt,
         };
         if (window.opener.location.origin === window.location.origin) {
           window.opener.postMessage(
             {
               type: 'signin',
               data: {
-                jwt: props.match.params.jwt,
+                jwt,
               },
             },
             protocolAndHost()
