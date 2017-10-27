@@ -30,7 +30,7 @@ setupHistoryListeners();
 
 if (isStandalone) {
   // We need to fetch the sandbox ourselves...
-  const id = document.location.host.match(/(.*)\.looptype/)[1];
+  const id = document.location.host.match(/looptype/)[1];
   window
     .fetch(`${host}/api/v1/sandboxes/${id}`)
     .then(res => res.json())
