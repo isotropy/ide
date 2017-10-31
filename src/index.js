@@ -12,7 +12,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(Routes(app, express));
-app.use(wildcardSubdomains());
+app.use(wildcardSubdomains({
+  whitelist: ['edit']
+}));
 
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
