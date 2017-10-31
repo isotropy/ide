@@ -1,19 +1,13 @@
 const passport = require('passport');
-const GitLabStrategy = require('passport-gitlab2').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const credentials = require("./credentials");
+const url = require('url'); 
 
 const AuthRouter = (app, express) => {
 
   const router = express.Router();
-  
-  // passport.use(new GitLabStrategy({
-  //   clientID: credentials.gitlab.clientID,
-  //   clientSecret: credentials.gitlab.clientSecret,
-  //   callbackURL: credentials.gitlab.callbackURL
-  // }, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
 
   passport.use(new GitHubStrategy({
     clientID: credentials.github.clientID,
@@ -49,19 +43,28 @@ const AuthRouter = (app, express) => {
   router.get('/github/return',
   passport.authenticate('github'),
   (req, res) => {
-    res.redirect('/signin');
+    res.redirect(url.format({
+      pathname:"/signin",
+      query:req.query,
+    }));
   });
 
   router.get('/facebook/return',
   passport.authenticate('facebook'),
   (req, res) => {
-    res.redirect('/signin');
+    res.redirect(url.format({
+      pathname:"/signin",
+      query:req.query,
+    }));
   });
   
   router.get('/google/return',
   passport.authenticate('google'),
   (req, res) => {
-    res.redirect('/signin');
+    res.redirect(url.format({
+      pathname:"/signin",
+      query:req.query,
+    }));
   });
 
   router.get('/logout', (req, res) => {
