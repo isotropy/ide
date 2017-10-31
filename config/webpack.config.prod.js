@@ -154,7 +154,7 @@ module.exports = merge(commonConfig, {
         {
           // These should be dynamic, since it's not loaded from this domain
           // But from the root domain
-          urlPattern: /edit\.looptype\.com\/static\/js\/(vendor|common|sandbox)/,
+          urlPattern: /\.looptype\.com\/static\/js\/(vendor|common|sandbox)/,
           handler: 'networkFirst',
           options: {
             cache: {

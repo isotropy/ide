@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const Routes = require('./routes');
 const path = require('path');
+const wildcardSubdomains = require('wildcard-subdomains');
 
 const app = express();
 
@@ -11,8 +12,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(Routes(app, express));
+app.use(wildcardSubdomains());
 
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
+
+app.get('/_sub/:sandbox/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'frame.html'));
+});
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'app.html'));
