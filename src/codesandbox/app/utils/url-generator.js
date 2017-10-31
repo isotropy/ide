@@ -9,12 +9,12 @@ const buildEncodedUri = (strings: Array<string>, ...values: Array<string>) =>
 
 export const host = () => {
   if (process.env.NODE_ENV === 'production') {
-    return 'looptype.com';
+    return 'edit.looptype.com';
   }
   if (process.env.LOCAL_SERVER) {
     return 'localhost:3000';
   }
-  return 'looptype.com';
+  return 'edit.looptype.com';
 };
 
 export const protocolAndHost = () => `${location.protocol}//${host()}`;

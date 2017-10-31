@@ -45,12 +45,24 @@ const AuthRouter = (app, express) => {
 
   router.get('/google',
     passport.authenticate('google', { scope: ['profile'] }));
+    
+  router.get('/github/return',
+  passport.authenticate('github'),
+  (req, res) => {
+    res.redirect('/signin');
+  });
 
-  router.get('/google/return', 
-    passport.authenticate('google'),
-    (req, res) => {
-      res.redirect('/');
-    });
+  router.get('/facebook/return',
+  passport.authenticate('facebook'),
+  (req, res) => {
+    res.redirect('/signin');
+  });
+  
+  router.get('/google/return',
+  passport.authenticate('google'),
+  (req, res) => {
+    res.redirect('/signin');
+  });
 
   router.get('/logout', (req, res) => {
     req.logout();
