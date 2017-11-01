@@ -68,13 +68,6 @@ export default ({ username, openPreferences, signOut }: Props) => (
         <SettingsIcon />
       </Icon>Preferences
     </Item>
-    <Link style={{ textDecoration: 'none' }} to={patronUrl()}>
-      <Item>
-        <Icon>
-          <PatronBadge style={{ width: 24, margin: '-6px -5px' }} size={24} />
-        </Icon>Patron Page
-      </Item>
-    </Link>
     <Item onClick={signOut}>
       <Icon>
         <ExitIcon />

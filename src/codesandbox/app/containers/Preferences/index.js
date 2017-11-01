@@ -72,11 +72,6 @@ class Preferences extends React.PureComponent {
         icon: <BrowserIcon />,
         content: <PreviewSettings />,
       },
-      signedIn && {
-        title: 'Integrations',
-        icon: <IntegrationIcon />,
-        content: <Integrations />,
-      },
       hasSubscription && {
         title: 'Payment Info',
         icon: <CreditCardIcon />,
