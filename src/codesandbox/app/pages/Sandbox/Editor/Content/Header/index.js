@@ -213,22 +213,6 @@ export default class Header extends React.PureComponent<Props> {
               <ChevronLeft />
             </Chevron>
           </Tooltip>
-          {user.jwt &&
-            (sandbox.userLiked ? (
-              <Action
-                tooltip="Undo like"
-                title={sandbox.likeCount}
-                Icon={FullHeartIcon}
-                onClick={this.toggleLike}
-              />
-            ) : (
-              <Action
-                tooltip="Like"
-                title={sandbox.likeCount}
-                Icon={HeartIcon}
-                onClick={this.toggleLike}
-              />
-            ))}
           <Action onClick={this.forkSandbox} title="Fork" Icon={Fork} />
           <Action
             onClick={canSave ? this.massUpdateModules : null}
@@ -237,23 +221,7 @@ export default class Header extends React.PureComponent<Props> {
             Icon={Save}
           />
           <Action title="Download" Icon={Download} onClick={this.zipSandbox} />
-          {user.jwt &&
-            sandbox.owned && (
-              <Action
-                title="Deploy"
-                Icon={NowIcon}
-                onClick={this.deploySandbox}
-              />
-            )}
           <Action title="Deploy" Icon={Deploy} onClick={this.deploySandbox} />
-          {user.jwt &&
-            sandbox.owned && (
-              <Action
-                title="Deploy"
-                Icon={NowIcon}
-                onClick={this.deploySandbox}
-              />
-            )}
         </Left>
 
         <Right>

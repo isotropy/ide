@@ -17,8 +17,9 @@ app.use(wildcardSubdomains({
 }));
 
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
+app.use('/_sub/:sandbox', express.static(path.resolve(__dirname, '..', 'build')));
 
-app.get('/_sub/:sandbox/*', (req, res) => {
+app.get('/_sub/:sandbox', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'frame.html'));
 });
 
