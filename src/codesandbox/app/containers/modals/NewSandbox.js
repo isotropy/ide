@@ -133,24 +133,6 @@ const NewSandbox = ({
         onClick={modalActions.closeModal}
       />
     </RowContainer>
-    <RowContainer>
-      <Logo
-        Icon={GithubIcon}
-        width={50}
-        height={50}
-        text="Import from Github"
-        href={importFromGitHubUrl()}
-        onClick={modalActions.closeModal}
-      />
-      <Logo
-        Icon={TerminalIcon}
-        width={50}
-        height={50}
-        text="Upload from CLI"
-        href={uploadFromCliUrl()}
-        onClick={modalActions.closeModal}
-      />
-    </RowContainer>
   </Container>
 );
 
